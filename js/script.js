@@ -1,6 +1,7 @@
 "use strict";
 
 import { clearBlankSpaces } from "./functions.js";
+import Persona from "./Persona.js";
 
 
 // Nodos
@@ -52,6 +53,19 @@ const validar = () => { // definición de la función
     return true;
 }
 
+const darAlta = () => {
+    let nombre = clearBlankSpaces(nombreInput.value);
+    let apellidos = clearBlankSpaces(apellidoInput.value);
+    let p1 = new Persona(nombre, apellidos);
+    p1._email = emailInput.value;
+    let index = cargoInput.selectedIndex; // El indice numérico seleccionado
+    // por el usuario
+    p1._cargo = cargoInput.options[index].text;
+    p1._info = otrosInput.value;
+    p1._fechaNacimiento = dateInput.value;
+    outData.innerHTML = p1.toString();
+}
+
 
 
 // Eventos
@@ -70,35 +84,27 @@ form.addEventListener(
 
         if (validar()) {
             if (altaInput.checked) {
-                alert("Dado de alta");
+                darAlta();
             } else {
                 alert("Modificaco");
             }
         }
 
-            // msg(
-            //     `<br>${prueba}</br>`, ev.target.parentElement
-            // );
-
-            outData.innerHTML = `${nombre} 
-        <br>${apellido}</br>
-        <br>${emailInput.value}</br>
-        <br>${dateInput.value}</br>
-        <br>${cargoInput.value}</br>
-        <br>${otrosInput.value}</br>
-        `;
+           
+            
 
             // console.log(nombre);
             // console.log(apellido);
-            console.log(emailInput.value);
-            console.log(dateInput.value);
-            console.log(cargoInput.value);
-            console.log(otrosInput.value);
+            // console.log(emailInput.value);
+            // console.log(dateInput.value);
+            // console.log(cargoInput.value);
+            // console.log(otrosInput.value);
         }
 );
 
 
 // recargar.addEventListener(
 //     "submit",
+        // ev.preventDefault();
 //     alert("epa")
 // );
